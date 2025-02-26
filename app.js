@@ -1,5 +1,10 @@
 import express from 'express'
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 const FILE_PATH = path.join(__dirname, "word.exe")
@@ -14,7 +19,7 @@ app.use((req, res, next) => {
   });
 
   app.get("/word.exe", (req, res) => {
-    res.download(FILE_PATH, "ord.exe", (err) => {
+    res.download(FILE_PATH, "word.exe", (err) => {
       if (err) {
         console.error("[-] Error sending file:", err);
         res.status(500).send("Server error");
